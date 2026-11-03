@@ -1,32 +1,24 @@
-const CACHE = 'tek-qr-v1';
-const SHELL = [
-  './', './index.html', './manifest.webmanifest',
-  './icon-180.png', './icon-192.png', './icon-512.png',
-  './icon-maskable-192.png', './icon-maskable-512.png'
-];
+/* This folder is retired. The app lives one level up, at /QR/.
 
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
-});
+   A phone that ever opened the old /QR/qr/ page registered the previous
+   service worker here, and that one served from cache first. Left alone it
+   would keep handing back the old page forever, redirect or no redirect.
+   So this replaces it, clears only the cache that worker made, unregisters
+   itself, and reloads any open tab so it follows the redirect.
 
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
-});
+   It deletes 'tek-qr-v1' by name on purpose. Cache storage is shared across
+   the whole origin, so clearing everything here would also wipe the cache the
+   live app at /QR/ depends on. */
 
-// Cache-first for this folder only; everything else goes straight to the network.
-self.addEventListener('fetch', e => {
-  const url = new URL(e.request.url);
-  const mine = url.origin === location.origin && url.pathname.startsWith(new URL('./', location).pathname);
-  if (e.request.method !== 'GET' || !mine) return;
-  e.respondWith(
-    caches.match(e.request, { ignoreSearch: true }).then(hit => hit || fetch(e.request).then(res => {
-      const copy = res.clone();
-      caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
-      return res;
-    }).catch(() => caches.match('./index.html')))
-  );
+const RETIRED_CACHE = 'tek-qr-v1';
+
+self.addEventListener('install', () => self.skipWaiting());
+
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    try { await caches.delete(RETIRED_CACHE); } catch (e) {}
+    try { await self.registration.unregister(); } catch (e) {}
+    const windows = await self.clients.matchAll({ type: 'window' });
+    windows.forEach(c => { try { c.navigate(c.url); } catch (e) {} });
+  })());
 });

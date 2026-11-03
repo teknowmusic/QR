@@ -1,283 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TEK_KNOWLEDGE — Scan</title>
-<meta name="description" content="Scan to reach Tek Knowledge (@teknowmusic) — music, comedy, video. New York.">
 <link rel="canonical" href="https://teknowmusic.github.io/QR/">
-
+<meta http-equiv="refresh" content="0; url=../">
+<meta name="robots" content="noindex">
 <meta name="theme-color" content="#06070C">
-<meta name="color-scheme" content="dark">
-<link rel="manifest" href="./manifest.webmanifest">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="TEK_QR">
-<link rel="apple-touch-icon" href="./icon-180.png">
-<link rel="icon" href="./icon-192.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;600&display=swap">
-
 <style>
-:root{
-  --bg:#06070C; --bg-2:#0B0D16; --surface:#0F1220;
-  --line:rgba(255,255,255,.09); --line-hi:rgba(0,240,168,.35);
-  --text:#EAECF5; --muted:#8A92AA;
-  --accent:#00F0A8; --accent-2:#7B5CFF;
-  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
-  --disp:"Space Grotesk",Inter,-apple-system,BlinkMacSystemFont,sans-serif;
-  --body:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
-body{
-  background:var(--bg); color:var(--text); font-family:var(--body);
-  min-height:100dvh; overflow:hidden;
-  overscroll-behavior:none;
-  -webkit-user-select:none; user-select:none;
-}
-/* ambient brand wash — same two lights as the site */
-body::before{
-  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
-  background:
-    radial-gradient(70% 45% at 50% 6%, rgba(0,240,168,.16), transparent 70%),
-    radial-gradient(60% 40% at 50% 100%, rgba(123,92,255,.14), transparent 70%),
-    linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 55%,var(--bg) 100%);
-}
-
-.wrap{
-  position:relative; z-index:1;
-  min-height:100dvh; display:flex; flex-direction:column; align-items:center;
-  padding:max(14px,env(safe-area-inset-top)) 18px max(10px,env(safe-area-inset-bottom));
-  gap:clamp(8px,1.6dvh,18px);
-}
-
-/* ── masthead ───────────────────────────── */
-.top{width:100%;display:flex;align-items:center;justify-content:space-between;flex:0 0 auto}
-.brand{font-family:var(--disp);font-weight:700;letter-spacing:.14em;font-size:13px}
-.brand b{color:var(--accent);font-weight:600}
-.live{
-  font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;color:var(--muted);
-  display:flex;align-items:center;gap:6px
-}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);
-  box-shadow:0 0 0 0 rgba(0,240,168,.55);animation:pulse 2.6s ease-out infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,240,168,.5)}70%,100%{box-shadow:0 0 0 9px rgba(0,240,168,0)}}
-
-.eyebrow{
-  font-family:var(--mono);font-size:10px;letter-spacing:.32em;color:var(--accent);
-  text-transform:uppercase;flex:0 0 auto;opacity:.9
-}
-
-/* ── the code: viewfinder ───────────────── */
-.stage{flex:1 1 auto;display:flex;align-items:center;justify-content:center;width:100%;min-height:0}
-.finder{
-  position:relative;
-  width:min(86vw, 52dvh, 390px); aspect-ratio:1;
-  padding:14px;
-  cursor:pointer;
-}
-/* four corner brackets */
-.finder i{position:absolute;width:24px;height:24px;border:2.5px solid var(--accent);border-radius:3px}
-.finder i:nth-child(1){top:0;left:0;border-right:0;border-bottom:0}
-.finder i:nth-child(2){top:0;right:0;border-left:0;border-bottom:0}
-.finder i:nth-child(3){bottom:0;left:0;border-right:0;border-top:0}
-.finder i:nth-child(4){bottom:0;right:0;border-left:0;border-top:0}
-
-.plate{
-  position:relative;width:100%;height:100%;
-  background:#fff;border-radius:10px;overflow:hidden;
-  box-shadow:0 0 0 1px rgba(0,240,168,.25), 0 0 44px -6px rgba(0,240,168,.30), 0 18px 44px -18px #000;
-  display:grid;place-items:center;
-}
-.plate svg{width:100%;height:100%;display:block}
-/* scan sweep */
-.plate::after{
-  content:"";position:absolute;left:0;right:0;height:34%;
-  background:linear-gradient(180deg,rgba(0,240,168,0),rgba(0,240,168,.20),rgba(0,240,168,0));
-  animation:sweep 3.4s cubic-bezier(.55,0,.45,1) infinite;
-  mix-blend-mode:multiply;pointer-events:none
-}
-@keyframes sweep{0%{transform:translateY(-120%)}55%,100%{transform:translateY(330%)}}
-
-/* ── identity ───────────────────────────── */
-.id{text-align:center;flex:0 0 auto;display:grid;gap:3px}
-.handle{font-family:var(--disp);font-weight:700;font-size:clamp(21px,6vw,29px);letter-spacing:-.01em}
-.handle span{color:var(--accent)}
-.target{
-  font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.03em;
-  word-break:break-all
-}
-
-/* ── target switcher ────────────────────── */
-.chips{
-  flex:0 0 auto;display:flex;gap:6px;width:100%;justify-content:center;flex-wrap:wrap
-}
-.chip{
-  font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.12em;
-  color:var(--muted);background:var(--surface);
-  border:1px solid var(--line);border-radius:999px;
-  padding:8px 12px;cursor:pointer;transition:color .18s,border-color .18s,background .18s;
-}
-.chip[aria-selected="true"]{color:var(--bg);background:var(--accent);border-color:var(--accent)}
-.chip:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
-
-/* ── footer ─────────────────────────────── */
-.foot{flex:0 0 auto;width:100%;display:grid;gap:8px;justify-items:center}
-.tag{font-size:11px;color:var(--muted);letter-spacing:.02em;text-align:center}
-.tag b{color:var(--text);font-weight:500}
-.share{
-  font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--accent-2);
-  background:none;border:0;padding:4px 8px;cursor:pointer
-}
-.share:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px;border-radius:4px}
-/* spectrum band — the site's console-meter motif */
-.band{display:flex;align-items:flex-end;gap:3px;height:16px;opacity:.5}
-.band s{width:3px;background:linear-gradient(180deg,var(--accent),var(--accent-2));
-  border-radius:2px;animation:eq 1.5s ease-in-out infinite alternate}
-@keyframes eq{from{height:12%}to{height:100%}}
-
-/* ── focus mode ─────────────────────────── */
-body.zoom .top,body.zoom .eyebrow,body.zoom .id,body.zoom .chips,body.zoom .foot{display:none}
-body.zoom .finder{width:min(94vw,94dvh);padding:10px}
-body.zoom .plate{box-shadow:0 0 0 1px rgba(0,240,168,.3)}
-.hint{
-  position:fixed;left:0;right:0;bottom:max(14px,env(safe-area-inset-bottom));
-  text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.2em;
-  color:var(--muted);display:none;z-index:2
-}
-body.zoom .hint{display:block}
-
-@media (prefers-reduced-motion:reduce){
-  .plate::after,.dot,.band s{animation:none}
-  .plate::after{display:none}
-  .band s{height:55%}
-}
-@media (max-height:620px){
-  .band{display:none}
-  .handle{font-size:19px}
-}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:28px;text-align:center;
+  background:#06070C;color:#EAECF5;
+  font-family:ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.7}
+a{color:#00F0A8}
+small{color:#8A92AA}
 </style>
 </head>
 <body>
-
-<div class="wrap">
-
-  <header class="top">
-    <div class="brand">TEK<b>_</b>KNOWLEDGE</div>
-    <div class="live"><span class="dot"></span>NEW YORK</div>
-  </header>
-
-  <p class="eyebrow" id="eyebrow">Point your camera here</p>
-
-  <div class="stage">
-    <div class="finder" id="finder" role="button" tabindex="0" aria-label="Enlarge the code">
-      <i></i><i></i><i></i><i></i>
-      <div class="plate">
-        <svg id="qr" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" role="img">
-          <title id="qrtitle">QR code</title>
-          <path id="qrpath" fill="#06070C"></path>
-        </svg>
-      </div>
-    </div>
-  </div>
-
-  <div class="id">
-    <div class="handle">@teknow<span>music</span></div>
-    <div class="target" id="target">teknowmusic.github.io</div>
-  </div>
-
-  <div class="chips" id="chips" role="tablist" aria-label="Choose what the code opens"></div>
-
-  <footer class="foot">
-    <p class="tag"><b>Rapper · Producer · Comedian</b><br>Music, comedy, and video. Booking open.</p>
-    <div class="band" aria-hidden="true"></div>
-    <button class="share" id="share" type="button">SHARE LINK</button>
-  </footer>
-</div>
-
-<p class="hint">TAP TO EXIT</p>
-
+<main>
+  <p>The scan card moved up a level.</p>
+  <p><a href="../">Open it here</a></p>
+  <p><small>You should be sent there automatically.</small></p>
+</main>
 <script>
-const QR = {"site":{"n":29,"label":"SITE","sub":"teknowmusic.github.io","url":"https://teknowmusic.github.io/","d":"fea173fc1324106eaf16bb75fb45dba3be2ec149c907faaaafe0148d0057cd076ee9541349be16ec48c11d66adc4b07eeeceaa0828186ebbdfa182a7fc01002a3be5ee91562033d02b62c0fb00755447fbb32bd0503514ba5bafddd60af76e9fe62b0511de2fe4948d0"},"music":{"n":33,"label":"MUSIC","sub":"soundcloud.com/teknowmusic","url":"https://soundcloud.com/teknowmusic","d":"fe55f93fc14593906ea4f3abb74163c5dba42892ec11b1f507faaaaafe0091d60076685403304d1e9b7f83305f6cb9443283262a5cd04baf3eba1bae84f9bb4afadc5aa51e6e2a3727d6f6aac086dd82c2b917a7c08067439a05240b8e9efea845227bbe1102f800799d46bf9aacea105cfdf1fba52c9fb5d62accbeeacbdcd105afe731fe6b450e0"},"video":{"n":33,"label":"VIDEO","sub":"youtube.com/@TeknowTV","url":"https://www.youtube.com/@TeknowTV","d":"fe2ea13fc10518106eb1dd4bb740e8c5dbadcd62ec15927d07faaaaafe00edf9004af04f5a5cd3f3a3558748514cae235c0c6e1833d86533c5b2b849b79568f68ac05e0f9ea97ecbb5c3f5fb53f544842d923665d58ac5292f91b8bfecd1441a19fdc2db1c4ff9805e83c5bf97782b104c5a512bad6d2fc5d22ec9cae882b1e9053b4a80fe1abec08"},"ig":{"n":33,"label":"IG","sub":"instagram.com/teknowmusic","url":"https://www.instagram.com/teknowmusic/","d":"fea0753fc125e4106e8f1babb74cb335dbad4e12ec163e5107faaaaafe009449007f79c3988aac1d9b52838aba92afe0ede837aa5dde64146b2c39f141f53a6f3fdc63ccf2dce2727dfb5fcb3096d593b22ffca126e5dd0dc42936dbeab92d33f988fd92beeaf9004a2ec57fb6b36ad0591bf1fbaad24fc5d4e07a76eb3d57d905383edcfe3ab3d10"},"card":{"n":49,"label":"CARD","sub":"Jose Perez - save my contact","url":"MECARD:N:Perez,Jose;NICKNAME:Teknowledge;TEL:7326760814;EMAIL:teknowmusic@gmail.com;URL:https://teknowmusic.github.io/;NOTE:AKA Tek Knowledge. Rapper, producer, comedian. New York;;","d":"fe119f63ecbfc1508adfa1d06eb50ed3746bb744a340ec25dbaa3cbfbd42ec14ec91f37107faaaaaaaaafe013034454c00d34d2bfd6e3b3ca9b18a4a86f78218b82a6364849d11b59a10fa5a9cddeff6684f82e92448681712e524125afa235bfff143ea72b2e8eec028151ae92a55b08b4be2f47c17b878872f52e58ac894f5368b4498288a0bfe8b4f92ffff11ed04728312aaa7aaa9b9a9a47b791c96c5e7ebf7fd4c3ea9a5c28584dc817f076609877a4339f18054d23b4d11900fde43b2fe29acc49b4da84b4e0c7491330c8023f7c3f3890a9ee89b7e19830300b8b6108e883da26da2e926991a45d32420dae1976c9b6170e387f7f2beff805097120545ffad6caf60ea70494cc41611dba0f2fe92dfc5d5ab36e40f26e9773252dc3905cbe07074a0fee2771bcf818"}
-};
-
-const qrSvg=document.getElementById('qr'),qrPath=document.getElementById('qrpath'),
-      qrTitle=document.getElementById('qrtitle'),targetEl=document.getElementById('target'),
-      chipsEl=document.getElementById('chips'),eyebrow=document.getElementById('eyebrow');
-let current='site';
-
-function draw(key){
-  const q=QR[key],n=q.n;
-  let bits='';
-  for(const ch of q.d) bits+=parseInt(ch,16).toString(2).padStart(4,'0');
-  let d='';
-  for(let y=0;y<n;y++){
-    for(let x=0;x<n;x++){
-      if(bits.charCodeAt(y*n+x)===49) d+='M'+x+' '+y+'h1v1h-1z';
-    }
-  }
-  qrSvg.setAttribute('viewBox','-4 -4 '+(n+8)+' '+(n+8));
-  qrPath.setAttribute('d',d);
-  qrTitle.textContent='QR code for '+q.sub;
-  targetEl.textContent=q.sub;
-  eyebrow.textContent = key==='card' ? 'Scan to save my contact' : 'Point your camera here';
-  current=key;
-  [...chipsEl.children].forEach(c=>c.setAttribute('aria-selected',String(c.dataset.k===key)));
+/* Replace the old cache-first worker that used to live in this folder, then go.
+   Without this, a phone that cached the old page would never see the redirect. */
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(function(){});
 }
-
-Object.keys(QR).forEach(k=>{
-  const b=document.createElement('button');
-  b.className='chip'; b.type='button'; b.role='tab'; b.dataset.k=k;
-  b.textContent=QR[k].label; b.setAttribute('aria-selected','false');
-  b.addEventListener('click',()=>{draw(k); if(navigator.vibrate) navigator.vibrate(8);});
-  chipsEl.appendChild(b);
-});
-const startKey = new URLSearchParams(location.search).get('c');
-draw(QR[startKey] ? startKey : 'site');
-
-/* spectrum band */
-const band=document.querySelector('.band');
-for(let i=0;i<18;i++){
-  const s=document.createElement('s');
-  s.style.animationDelay=(-Math.random()*1.5).toFixed(2)+'s';
-  s.style.animationDuration=(0.9+Math.random()*1.1).toFixed(2)+'s';
-  band.appendChild(s);
-}
-
-/* focus mode — bigger code, nothing else on screen */
-const finder=document.getElementById('finder');
-function toggleZoom(){
-  const on=document.body.classList.toggle('zoom');
-  if(on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
-  if(!on && document.fullscreenElement) document.exitFullscreen().catch(()=>{});
-}
-finder.addEventListener('click',toggleZoom);
-finder.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleZoom();}});
-document.querySelector('.hint').addEventListener('click',toggleZoom);
-
-/* keep the screen lit while someone is scanning */
-let lock=null;
-async function hold(){
-  try{ if('wakeLock' in navigator && document.visibilityState==='visible') lock=await navigator.wakeLock.request('screen'); }catch(e){}
-}
-hold();
-document.addEventListener('visibilitychange',hold);
-
-/* share */
-document.getElementById('share').addEventListener('click',async()=>{
-  const url=QR[current].url, btn=document.getElementById('share');
-  if(current==='card'){ location.href='mailto:teknowmusic@gmail.com'; return; }
-  try{
-    if(navigator.share){ await navigator.share({title:'Tek Knowledge',url}); }
-    else { await navigator.clipboard.writeText(url); btn.textContent='COPIED'; setTimeout(()=>btn.textContent='SHARE LINK',1600); }
-  }catch(e){}
-});
-
-if('serviceWorker' in navigator) addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+location.replace('../');
 </script>
 </body>
 </html>

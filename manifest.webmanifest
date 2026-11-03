@@ -4,7 +4,7 @@
   "description": "Show this code so people can reach @teknowmusic — site, music, video, Instagram, or contact card.",
   "start_url": "./",
   "scope": "./",
-  "id": "/qr/",
+  "id": "/QR/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#06070C",
